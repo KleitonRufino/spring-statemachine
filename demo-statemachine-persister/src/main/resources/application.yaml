@@ -1,0 +1,44 @@
+spring:
+  boot:
+    admin:
+      client:
+        url: http://localhost:8080
+        instance:
+          prefer-ip: true
+  application:
+    name: demo-statemachine
+  h2:
+    console:
+      enabled: true
+  sql:
+    init:
+      platform: org.hibernate.dialect.H2Dialect
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password: 
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+management:
+  #server:
+    #port: 8087
+  endpoints:
+    web:
+      #base-path: /portal-admin
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+    shutdown:
+      enabled: true
+
+logging:
+  file:
+    path: log
