@@ -1,0 +1,51 @@
+server:
+  port: 8080
+spring:
+  boot:
+    admin:
+      client:
+        url: http://localhost:8080
+        instance:
+          prefer-ip: true
+ 
+  application:
+    name: demo-statemachine-kafka-persister
+ 
+  h2:
+    console:
+      enabled: true
+  sql:
+    init:
+      platform: org.hibernate.dialect.H2Dialect
+  
+  kafka:
+    consumer:
+      properties:
+        spring.json.trusted.packages: "com.example.demo.*"
+      bootstrap-servers: localhost:29092
+      group-id: group_id
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+    producer:
+        bootstrap-servers: localhost:29092
+        key-serializer: org.apache.kafka.common.serialization.StringSerializer
+        value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+        
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+    shutdown:
+      enabled: true
+
+logging:
+  file:
+    path: log
+    name: log.log
+    max-history: 20
+    max-size: 20MB
