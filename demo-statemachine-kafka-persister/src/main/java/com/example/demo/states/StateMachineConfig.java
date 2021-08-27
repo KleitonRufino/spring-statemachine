@@ -15,10 +15,13 @@ import org.springframework.statemachine.data.jpa.JpaPersistingStateMachineInterc
 import org.springframework.statemachine.data.jpa.JpaStateMachineRepository;
 import org.springframework.statemachine.listener.StateMachineListener;
 import org.springframework.statemachine.listener.StateMachineListenerAdapter;
+import org.springframework.statemachine.monitor.StateMachineMonitor;
 import org.springframework.statemachine.persist.StateMachineRuntimePersister;
 import org.springframework.statemachine.service.DefaultStateMachineService;
 import org.springframework.statemachine.service.StateMachineService;
 import org.springframework.statemachine.state.State;
+
+import com.example.demo.monitor.TestStateMachineMonitor;
 
 @Configuration
 @EnableStateMachineFactory(contextEvents = false)
@@ -41,11 +44,20 @@ public class StateMachineConfig extends StateMachineConfigurerAdapter<States, Ev
     public void configure(StateMachineConfigurationConfigurer<States, Events> config)
             throws Exception {
         config
+        .withMonitoring()
+           .monitor(stateMachineMonitor())
+        .and()
 		.withPersistence()
 			.runtimePersister(stateMachineRuntimePersister(jpaStateMachineRepository));
     }
     
 	
+	@Bean
+	private StateMachineMonitor<States, Events> stateMachineMonitor() {
+		// TODO Auto-generated method stub
+		return new TestStateMachineMonitor();
+	}
+
 	@Override
 	public void configure(StateMachineStateConfigurer<States, Events> states) throws Exception {
 		states.withStates()
