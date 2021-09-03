@@ -34,7 +34,7 @@ public class RecoveryOfferMsisdnAction implements Action<States, Events> {
 			this.delegate.execute(ordem);
 		
 			log.info("ID STATE " + context.getStateMachine().getId() + " | " + "STATE " + context.getStateMachine().getState().getId());		
-			machine.sendEvent(Events.UPDATING_OFFERS_STATUS);
+			machine.sendEvent(Events.RECUPERANDO_OFFERS_STATUS);
 			
 		} catch (Exception e) {
 			context.getStateMachine().setStateMachineError(e);

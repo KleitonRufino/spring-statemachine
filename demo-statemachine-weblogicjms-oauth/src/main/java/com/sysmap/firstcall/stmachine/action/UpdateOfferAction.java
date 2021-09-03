@@ -34,7 +34,7 @@ public class UpdateOfferAction implements Action<States, Events> {
 			this.delegate.execute(ordem);
 		
 			log.info("ID STATE " + context.getStateMachine().getId() + " | " + "STATE " + context.getStateMachine().getState().getId());
-			machine.sendEvent(Events.SAVING_OFFERS);
+			machine.sendEvent(Events.SALVANDO_OFFERS);
 		} catch (Exception e) {
 			context.getStateMachine().setStateMachineError(e);
 		}

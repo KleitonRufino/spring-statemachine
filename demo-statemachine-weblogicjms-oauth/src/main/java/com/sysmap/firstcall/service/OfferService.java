@@ -20,7 +20,7 @@ public class OfferService {
 	private final StMachineService stMachineService;
 	
 	public void executar() throws Exception {
-		this.stMachineService.startAndSendEvent(UUID.randomUUID().toString(), Events.RECOVERING_OFFERS, new HashMap<String, Object>());
+		this.stMachineService.startAndSendEvent(UUID.randomUUID().toString(), Events.RECUPERANDO_OFFERS, new HashMap<String, Object>());
 	}
 
 	public void retry(List<Offer> offers) {

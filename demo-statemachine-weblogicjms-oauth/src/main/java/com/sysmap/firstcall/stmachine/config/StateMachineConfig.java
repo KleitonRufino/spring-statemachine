@@ -80,13 +80,13 @@ public class StateMachineConfig extends StateMachineConfigurerAdapter<States, Ev
 			
 			.stateDo(States.START, this.startAction)
 				
-			.stateDo(States.RECOVERY_OFFERS, this.recoveryOfferAction)
+			.stateDo(States.RECUPERAR_OFFERS, this.recoveryOfferAction)
 			
-			.stateDo(States.RECOVERY_OFFERS_MSISDN, this.recoveryOfferMsisdnAction)
+			.stateDo(States.RECUPERAR_OFFERS_MSISDN, this.recoveryOfferMsisdnAction)
 			
-			.stateDo(States.UPDATE_OFFERS, this.updateOfferAction)
+			.stateDo(States.ATUALIZAR_OFFERS, this.updateOfferAction)
 
-			.stateDo(States.SAVE_OFFERS, this.saveOfferAction)
+			.stateDo(States.SALVAR_OFFERS, this.saveOfferAction)
 
 			.stateDo(States.FINISH, this.finishAction);
 	}
@@ -95,18 +95,18 @@ public class StateMachineConfig extends StateMachineConfigurerAdapter<States, Ev
 	public void configure(StateMachineTransitionConfigurer<States, Events> transitions) throws Exception {	
 		
 		transitions.withExternal()
-			.source(States.START).target(States.RECOVERY_OFFERS).event(Events.RECOVERING_OFFERS)
+			.source(States.START).target(States.RECUPERAR_OFFERS).event(Events.RECUPERANDO_OFFERS)
 		.and().withExternal()
-			.source(States.RECOVERY_OFFERS).target(States.RECOVERY_OFFERS_MSISDN).event(Events.RECOVERING_OFFERS_MSISDN)
+			.source(States.RECUPERAR_OFFERS).target(States.RECUPERAR_OFFERS_MSISDN).event(Events.RECUPERANDO_OFFERS_MSISDN)
 		.and().withExternal()
-			.source(States.RECOVERY_OFFERS_MSISDN).target(States.UPDATE_OFFERS).event(Events.UPDATING_OFFERS_STATUS)	
+			.source(States.RECUPERAR_OFFERS_MSISDN).target(States.ATUALIZAR_OFFERS).event(Events.RECUPERANDO_OFFERS_STATUS)	
 		.and().withExternal()
-			.source(States.UPDATE_OFFERS).target(States.SAVE_OFFERS).event(Events.SAVING_OFFERS)
+			.source(States.ATUALIZAR_OFFERS).target(States.SALVAR_OFFERS).event(Events.SALVANDO_OFFERS)
 		.and().withExternal()
-			.source(States.SAVE_OFFERS).target(States.FINISH).event(Events.FINISHING)
+			.source(States.SALVAR_OFFERS).target(States.FINISH).event(Events.FINISHING)
 		//RETRY
 		.and().withExternal()
-			.source(States.START).target(States.RECOVERY_OFFERS_MSISDN).event(Events.RETRY);
+			.source(States.START).target(States.RECUPERAR_OFFERS_MSISDN).event(Events.RETRY);
 
 	}
 
