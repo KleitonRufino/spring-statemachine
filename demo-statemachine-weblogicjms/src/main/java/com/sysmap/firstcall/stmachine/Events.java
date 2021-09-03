@@ -1,0 +1,5 @@
+package com.sysmap.firstcall.stmachine;
+
+public enum Events {
+	RECOVERING_OFFERS, RECOVERING_OFFERS_MSISDN, UPDATING_OFFERS_STATUS, SAVING_OFFERS, FINISHING, RETRY
+}

@@ -1,0 +1,62 @@
+server:
+  port: 8080
+spring:
+
+  application:
+    name: FirstCall
+
+  boot:
+    admin:
+      context-path: /admin
+      client:
+        url: http://localhost:8080/admin
+        username: ${spring.security.user.name}
+        password: ${spring.security.user.password}
+        instance:
+          prefer-ip: true
+          metadata.user:
+            name: ${spring.security.user.name}
+            password: ${spring.security.user.password}   
+  
+  security:
+    user:
+      name: admin
+      password: admin
+    oauth2:
+      client:
+        registration:
+          app:
+            client-name: app
+            client-id:  client1
+     
+  h2:
+    console:
+      enabled: true
+  
+  sql:
+    init:
+      platform: org.hibernate.dialect.H2Dialect
+  
+  jms:
+    broker-url: t3://localhost:7001
+    context-factory: weblogic.jndi.WLInitialContextFactory 
+    jndi-name: jms/myConnectionFactory
+    template:
+      default-destination: jms/myTestQueue
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+    shutdown:
+      enabled: true
+
+logging:
+  file:
+    name: /log/log.log
+    max-history: 20
+    max-size: 20MB
